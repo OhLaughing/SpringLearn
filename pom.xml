@@ -4,10 +4,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>SpringLearn</groupId>
+  <groupId>com.learn</groupId>
   <artifactId>SpringLearn</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <modules>
+        <module>_01_Spring_FirstSight</module>
+    </modules>
+    <packaging>pom</packaging>
 
   <name>SpringLearn</name>
   <!-- FIXME change it to the project's website -->
