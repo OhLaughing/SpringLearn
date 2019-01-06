@@ -1,6 +1,7 @@
 ## _01_Spring_FirstSight/
 
 maven 的依赖关系：
+```
 [INFO] +- junit:junit:jar:4.11:test
 [INFO] |  \- org.hamcrest:hamcrest-core:jar:1.3:test
 [INFO] +- org.springframework:spring-context:jar:4.3.9.RELEASE:compile
@@ -16,5 +17,5 @@ maven 的依赖关系：
 [INFO] |  +- net.bytebuddy:byte-buddy-agent:jar:1.7.9:test
 [INFO] |  \- org.objenesis:objenesis:jar:2.6:test
 [INFO] \- org.springframework:spring-test:jar:4.3.9.RELEASE:test
-
+```
 context依赖aop、core、beans、expression几个基础模块
