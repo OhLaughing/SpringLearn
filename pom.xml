@@ -12,6 +12,7 @@
         <module>Mastering_SpringMvc</module>
       <module>_02_FactoryBean</module>
         <module>_03_SpringAop</module>
+        <module>_04_SpringInAction_Chapter2</module>
     </modules>
     <packaging>pom</packaging>
 
