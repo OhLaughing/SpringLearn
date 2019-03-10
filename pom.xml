@@ -11,6 +11,7 @@
         <module>_01_Spring_FirstSight</module>
         <module>Mastering_SpringMvc</module>
       <module>_02_FactoryBean</module>
+        <module>_03_SpringAop</module>
     </modules>
     <packaging>pom</packaging>
 
