@@ -5,4 +5,11 @@
 
     <bean id="foo" class="com.learn.Foo"/>
     <bean id="foo_1" class="com.learn.Foo" scope="prototype"/>
+
+    <bean id="dateFoo" class="com.learn.DateFoo">
+        <property name="date">
+            <value>2007/10/16</value>
+        </property>
+    </bean>
+    <bean id="instance" class="com.learn.InstanceWithSataic"/>
 </beans>

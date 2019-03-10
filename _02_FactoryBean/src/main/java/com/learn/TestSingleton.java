@@ -12,5 +12,6 @@ public class TestSingleton {
         Foo f1 = (Foo) context.getBean("foo");
         Foo f2 = (Foo) context.getBean("foo");
         System.out.println(f1 == f2);
+
     }
 }
