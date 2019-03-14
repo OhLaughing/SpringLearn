@@ -52,4 +52,10 @@ public class SpittleController {
         return "registerForm";
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String processRegistration(Spittle spittle) {
+        System.out.println(spittle);
+        spittleRepository.save(spittle);
+        return "redirect:/spittle/" + spittle.getId();
+    }
 }
