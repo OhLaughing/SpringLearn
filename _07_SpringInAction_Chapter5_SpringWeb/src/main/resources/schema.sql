@@ -3,7 +3,6 @@ DROP TABLE Spittle IF EXISTS ;
 create table Spittle (
 	id int UNIQUE ,
 	message varchar(140) not null,
-	created_at timestamp not null,
 	latitude double,
 	longitude double
 );

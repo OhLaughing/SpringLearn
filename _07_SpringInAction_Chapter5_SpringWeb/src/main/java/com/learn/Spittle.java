@@ -3,13 +3,11 @@ package com.learn;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import java.util.Date;
-
 public class Spittle {
 
     private Long id;
     private String message;
-    private Date time;
+
     private Double latitude;
     private Double longitude;
 
@@ -17,10 +15,9 @@ public class Spittle {
 
     }
 
-       public Spittle(Long id, String message, Date time, Double longitude, Double latitude) {
+    public Spittle(Long id, String message,  Double longitude, Double latitude) {
         this.id = id;
         this.message = message;
-        this.time = time;
         this.longitude = longitude;
         this.latitude = latitude;
     }
@@ -33,8 +30,20 @@ public class Spittle {
         return message;
     }
 
-    public Date getTime() {
-        return time;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public Double getLongitude() {
@@ -64,7 +73,6 @@ public class Spittle {
         return "Spittle{" +
                 "id=" + id +
                 ", message='" + message + '\'' +
-                ", time=" + time +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 '}';

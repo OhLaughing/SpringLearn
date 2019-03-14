@@ -10,7 +10,7 @@
 <h1>Register</h1>
 
 <form method="POST">
-
+    Id:<input type="text" name="id"/><br/>
     Message: <input type="text" name="message"/><br/>
     Latitude: <input type="text" name="latitude"/><br/>
     Longitude: <input type="text" name="longitude"/><br/>

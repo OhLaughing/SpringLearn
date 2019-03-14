@@ -21,24 +21,24 @@ public class JdbcSpittleRepository implements SpittleRepository {
 
   public List<Spittle> findRecentSpittles() {
     return jdbc.query(
-        "select id, message, created_at, latitude, longitude" +
+        "select id, message,  latitude, longitude" +
         " from Spittle" +
-        " order by created_at desc limit 20",
+        "  limit 20",
         new SpittleRowMapper());
   }
 
   public List<Spittle> findSpittles(long max, int count) {
     return jdbc.query(
-        "select id, message, created_at, latitude, longitude" +
+        "select id, message, latitude, longitude" +
         " from Spittle" +
         " where id < ?" +
-        " order by created_at desc limit 20",
+        "  limit 20",
         new SpittleRowMapper(), max);
   }
 
   public Spittle findOne(long id) {
     return jdbc.queryForObject(
-        "select id, message, created_at, latitude, longitude" +
+        "select id, message,  latitude, longitude" +
         " from Spittle" +
         " where id = ?",
         new SpittleRowMapper(), id);
@@ -46,10 +46,10 @@ public class JdbcSpittleRepository implements SpittleRepository {
 
   public void save(Spittle spittle) {
     jdbc.update(
-        "insert into Spittle (message, created_at, latitude, longitude)" +
+        "insert into Spittle (id, message, latitude, longitude)" +
         " values (?, ?, ?, ?)",
+        spittle.getId(),
         spittle.getMessage(),
-        spittle.getTime(),
         spittle.getLatitude(),
         spittle.getLongitude());
   }
@@ -59,8 +59,7 @@ public class JdbcSpittleRepository implements SpittleRepository {
       return new Spittle(
           rs.getLong("id"),
           rs.getString("message"), 
-          rs.getDate("created_at"), 
-          rs.getDouble("longitude"), 
+          rs.getDouble("longitude"),
           rs.getDouble("latitude"));
     }
   }
