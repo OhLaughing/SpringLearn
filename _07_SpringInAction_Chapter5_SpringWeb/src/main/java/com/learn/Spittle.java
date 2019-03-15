@@ -3,9 +3,13 @@ package com.learn;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import javax.validation.constraints.NotNull;
+
 public class Spittle {
 
+    @NotNull
     private Long id;
+    @NotNull
     private String message;
 
     private Double latitude;
@@ -15,7 +19,7 @@ public class Spittle {
 
     }
 
-    public Spittle(Long id, String message,  Double longitude, Double latitude) {
+    public Spittle(Long id, String message, Double longitude, Double latitude) {
         this.id = id;
         this.message = message;
         this.longitude = longitude;
