@@ -2,27 +2,17 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>SpringLearn</artifactId>
+        <groupId>com.learn</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.learn</groupId>
-    <artifactId>SpringLearn</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>_01_Spring_FirstSight</module>
-        <module>Mastering_SpringMvc</module>
-        <module>_02_FactoryBean</module>
-        <module>_03_SpringAop</module>
-        <module>_04_SpringInAction_Chapter2</module>
-        <module>_05_SpringInAction_Chapter3</module>
-        <module>_06_SpringInAction_Chapter4_AOP</module>
-        <module>_07_SpringInAction_Chapter5_SpringWeb</module>
-        <module>_08_SpringInAction_Chapter6_Spitter</module>
-        <module>_09_SpringInAction_Chapter6_Thymeleaf</module>
-        <module>_10_SpringInAction_Chapter6_Thymeleaf_xml</module>
-    </modules>
-    <packaging>pom</packaging>
+    <artifactId>_10_SpringInAction_Chapter6_Thymeleaf_xml</artifactId>
 
-    <name>SpringLearn</name>
+    <name>_10_SpringInAction_Chapter6_Thymeleaf_xml</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -32,6 +22,40 @@
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>2.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.3.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.197</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
@@ -75,29 +99,7 @@
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.1</version>
-                    <configuration>
-                        <port>9090</port>
-                        <path>/</path>
-                        <uriEncoding>UTF-8</uriEncoding>
-                        <server>tomcat7</server>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
 </project>
