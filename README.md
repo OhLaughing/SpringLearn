@@ -8,3 +8,8 @@
 - *-servlet.xml文件中 配置viewResolver
 - Controller
 - webapp/WEB-INF/views/ 文件夹下html文件
+
+
+### 第七章学习计划
+1. springmvc + Thymeleaf 通过java配置的方式基本的功能
+2. 
