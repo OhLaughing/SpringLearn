@@ -21,6 +21,7 @@
         <module>_10_SpringInAction_Chapter6_Thymeleaf_xml</module>
         <module>_11_Springmvc_Thymeleaf_Xml</module>
         <module>_12_SpringInAction_Chapter7</module>
+        <module>_13_SpringInAction_Chapter7_MultipartFile</module>
     </modules>
     <packaging>pom</packaging>
 
