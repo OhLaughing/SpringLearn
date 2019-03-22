@@ -12,4 +12,5 @@
 
 ### 第七章学习计划
 1. springmvc + Thymeleaf 通过java配置的方式基本的功能
+- 由于thymeleaf-spring4的版本用的不对，导致编译都不过，现阶段SpringInAction里用的thymeleaf-spring4都用用版本2
 2. 
