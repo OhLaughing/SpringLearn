@@ -9,6 +9,8 @@
 - Controller
 - webapp/WEB-INF/views/ 文件夹下html文件
 
+### 技术积累
+- ContextLoaderListener 是一种引入方式，默认读取/WEB-INF/applicationContext.xml, 若是spring-web项目，DispatcherServlet 也是一种引入方式，默认读取/WEB-INF/${servlet-name}-servlet.xml
 
 ### 第七章学习计划
 1. springmvc + Thymeleaf 通过java配置的方式基本的功能
