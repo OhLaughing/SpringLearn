@@ -71,3 +71,40 @@
      name="profilePicture"
      accept="image/jpeg,image/png,image/gif" /><br/>
 ```
+通过Part接口的方式的代码：
+```java
+    @RequestMapping(value = "/register", method = POST)
+    public String processRegistration(
+            @RequestPart(value = "profilePicture", required = false) Part fileBytes,
+            RedirectAttributes redirectAttributes,
+            @Valid Spitter spitter,
+            Errors errors) throws IOException {
+        if (errors.hasErrors()) {
+            return "registerForm";
+        }
+        if(fileBytes != null) {
+            System.out.println("file name " + fileBytes.getHeader("Content-Disposition"));
+            System.out.println("file size; " + fileBytes.getSize());
+            InputStream is = fileBytes.getInputStream();
+            File file = new File("multipartFile.png");
+            OutputStream os = new FileOutputStream(file);
+            byte[] bytes = new byte[4096];
+            try {
+                while (is.read(bytes) != -1) {
+                    os.write(bytes);
+                }
+            } finally {
+                is.close();
+                os.close();
+            }
+        }else{
+            System.out.println("fileBytes is null");
+        }
+        spitterRepository.save(spitter);
+        redirectAttributes.addAttribute("username", spitter.getUsername());
+        redirectAttributes.addFlashAttribute(spitter);
+        return "redirect:/spitter/" + spitter.getUsername();
+    }
+```
+
+
