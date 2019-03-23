@@ -51,3 +51,17 @@
         </plugin>
 ```               
 打完war包之后，拷贝到tomcat的webapps目录下，执行bin/startup.bat，可以通过localhost:8080/SpitterExample/hello来访问
+-   从url输入网址到post提交文件的流程：
+（1）页面输入localhost:9090/spitter/register
+定位到mapping到spitter/register的方法
+```java
+    @RequestMapping(value = "/register", method = GET)
+    public String showRegistrationForm(Model model) {
+        Spitter s = new Spitter();
+        model.addAttribute(s);
+        return "registerForm";
+    }
+```
+   也就是定位到showRegistrationForm方法，该方法只是把一个new的Spitter对象加入到Model中，然后registerForm页面，也就是registerForm.html
+   静态打开registerForm.html文件时，可以看到有th:object等的一些Thymeleaf的标签，但是通过tomcat运行起来之后，返回给客户端的页面是不包含这些标签的，这些标签是被转换成html的格式的
+   （2）通过上一步返回一个html页面，在这个页面输入信息，然后点击按钮,提交数据
