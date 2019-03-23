@@ -37,3 +37,17 @@
 ```
 通过localhost:9090/spitter/xiaoming，就可以获取对象信息，其中model.addAttribute("spitter", xiaoming);可以写成model.addAttribute( xiaoming);
 因为如果不指定model的key值，会把对象的类当做key值（类首字母小写），
+测试过程中发现，通过mvn package的方式不能成功的打war包，提示找不到web.xml，后来通过增加maven-war-plugin来解决
+```
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.4</version>
+            <configuration>
+                <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                <warName>SpitterExample</warName>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
+```               
+打完war包之后，拷贝到tomcat的webapps目录下，执行bin/startup.bat，可以通过localhost:8080/SpitterExample/hello来访问
