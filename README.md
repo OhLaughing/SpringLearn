@@ -21,3 +21,19 @@
 1. springmvc + Thymeleaf 通过java配置的方式基本的功能
 - 由于thymeleaf-spring4的版本用的不对，导致编译都不过，现阶段SpringInAction里用的thymeleaf-spring4都用用版本2
 2. 完成基本的MultiPartFile功能，然后主要学Thymeleaf的知识，以及后端的交互
+- profile.html： div和span的使用，两者都是独立的块元素，里面都可以使用html元素，主要的区别是div块换行，而span不换行,
+<span th:text="${spitter.username}">username</span>,使用了thymeleaf，${spitter.username}是获取Model中spitter对象的username属性的方式，html通过静态的方式打开，就显示username，动态情况打开就获取对象,如果单纯只是为了测试通过thymeleaf的标签获取model的对象信息，可以通过增加下面的Controller:
+```java
+    @RequestMapping(value = "xiaoming")
+    public String showInfo(Model model) {
+        Spitter xiaoming = new Spitter();
+        xiaoming.setFirstName("xiaoming");
+        xiaoming.setEmail("xiaoming@126.com");
+        xiaoming.setId(1234L);
+        xiaoming.setUsername("LiXiaoming");
+        model.addAttribute("spitter", xiaoming);
+        return "profile";
+    }
+```
+通过localhost:9090/spitter/xiaoming，就可以获取对象信息，其中model.addAttribute("spitter", xiaoming);可以写成model.addAttribute( xiaoming);
+因为如果不指定model的key值，会把对象的类当做key值（类首字母小写），
