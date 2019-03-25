@@ -6,7 +6,7 @@
 ```
 <div id="header" th:include="page :: header"></div>
 ```
-
+-   _14_SpringSecurity_Xml_Basic: spring security的基本xml配置
 ### Springmvc + Thymeleaf web.xml工程搭建步骤：
 - 创建工程，maven依赖spring-webmvc、javax.servlet-api(provided)、thymeleaf-spring4, tomcat插件、packaging:war
 - webapp/WEB-INF/web.xml 配置DispatcherServlet、contextConfigLocation（*-servlet.xml）
