@@ -135,3 +135,5 @@
 ```
 两种方式区别是：MultipartFile可以直接用transferTo的方式保存文件，而Part没有，MultipartFile可以通过getOriginalFilename()获取文件名称，Part是通过getSubmittedFileName()来获取文件名称，Part接口是在javax.servlet-api包中，如果版本不一致会导致编译时能通过，但是运行时是依赖tomcat的相应的servlet包，导致运行时失败，我本地测试时就没成功，提示空指针，而MultipartFile是springWeb的jar包
 
+### Spring Security 
+-   spring security 教程： https://www.yiibai.com/spring-security
