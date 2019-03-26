@@ -137,3 +137,7 @@
 
 ### Spring Security 
 -   spring security 教程： https://www.yiibai.com/spring-security,  https://www.w3cschool.cn/springsecurity/na1k1ihx.html
+-   手动设置登录页面时， 用下面的方式：
+<security:intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
+或
+<security:http pattern="/login" security="none"></security:http> 可以达到给登录的页面放行的目的，但是我测试中用IS_AUTHENTICATED_ANONYMOUSLY还没有成功
