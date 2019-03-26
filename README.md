@@ -143,3 +143,4 @@
 <security:http pattern="/login" security="none"></security:http> 可以达到给登录的页面放行的目的，但是我测试中用IS_AUTHENTICATED_ANONYMOUSLY还没有成功
 - https://moon-walker.iteye.com/blog/2395270
 - https://www.cnblogs.com/hongxf1990/p/6530084.html
+- https://docs.spring.io/spring-security/site/docs/5.2.0.BUILD-SNAPSHOT/reference/htmlsingle/#design-of-the-namespace
