@@ -135,6 +135,10 @@
 ```
 两种方式区别是：MultipartFile可以直接用transferTo的方式保存文件，而Part没有，MultipartFile可以通过getOriginalFilename()获取文件名称，Part是通过getSubmittedFileName()来获取文件名称，Part接口是在javax.servlet-api包中，如果版本不一致会导致编译时能通过，但是运行时是依赖tomcat的相应的servlet包，导致运行时失败，我本地测试时就没成功，提示空指针，而MultipartFile是springWeb的jar包
 
+### SpringInAction 第九章
+-   现在已经完成了通过xml配置的Spring security的基本功能，但是昨天一天都没有实现自己实现登录页面，网上很多例子都是jsp的，看来有时间还是要把jsp看下
+，登录页面暂时先跳过有时间再弄下，接下来第九章的要完成的任务有：通过java配置的方式实现spring Security, 还有就是熟练三个configure()方法的配置
+
 ### Spring Security 
 -   spring security 教程： https://www.yiibai.com/spring-security,  https://www.w3cschool.cn/springsecurity/na1k1ihx.html
 -   手动设置登录页面时， 用下面的方式：
