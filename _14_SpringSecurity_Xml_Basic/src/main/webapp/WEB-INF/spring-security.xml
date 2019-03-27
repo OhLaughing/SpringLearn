@@ -11,13 +11,12 @@
     <!--</security:http>-->
 
     <security:http auto-config="true">
-        <security:form-login login-page="/login"
+        <security:form-login login-page="/loginPage"
                              login-processing-url="/login"
-                             default-target-url="/welcome"
                              authentication-failure-url="/loginPage?error=error"
                              always-use-default-target="true"/>
         <!-- 表示匿名用户可以访问 -->
-        <security:intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
+        <security:intercept-url pattern="/loginPage" access="hasRole('ROLE_ANONYMOUS')"/>
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <!--<security:csrf disabled="true" />-->
     </security:http>

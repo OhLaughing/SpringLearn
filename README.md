@@ -6,7 +6,32 @@
 ```
 <div id="header" th:include="page :: header"></div>
 ```
--   _14_SpringSecurity_Xml_Basic: spring security的基本xml配置
+-   _14_SpringSecurity_Xml_Basic: spring security的基本xml配置，完成基本的用户登录， 把spring security登录的步骤记录：
+1. 创建maven工程， package：war, 增加配置spring-security-web、spring-security-config、thymeleaf-spring4、spring-webmvc
+2. webapp/WEB-INF/web.xml中配置filter
+````
+<filter>
+<filter-name>springSecurityFilterChain</filter-name>
+<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+</filter>
+
+<filter-mapping>
+<filter-name>springSecurityFilterChain</filter-name>
+<url-pattern>/*</url-pattern>
+</filter-mapping>
+````
+3. web.xml中增加spring-security.xml配置
+```
+<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml, /WEB-INF/spring-security.xml</param-value>
+</context-param>
+```
+4. 配置spring-security.xml
+5. 配置Controller
+
+
+
 ### Springmvc + Thymeleaf web.xml工程搭建步骤：
 - 创建工程，maven依赖spring-webmvc、javax.servlet-api(provided)、thymeleaf-spring4, tomcat插件、packaging:war
 - webapp/WEB-INF/web.xml 配置DispatcherServlet、contextConfigLocation（*-servlet.xml）
@@ -148,19 +173,51 @@ spring-security.xml中通过：
 通过上面配置，就可以实现登录，但是登录的页面是spring默认提供的登录页面，如果想要自己实现登录页面， 可以在spring-security.xml中配置：
 ```
     <security:http auto-config="true">
-        <security:form-login login-page="/login"
-                             login-processing-url="/login"
-                             default-target-url="/welcome"
-                             authentication-failure-url="/loginPage?error=error"
-                            always-use-default-target="true"/>
+        <security:form-login login-page="/loginPage"                      //1
+                             login-processing-url="/login"                //2
+                             default-target-url="/welcome"                //3
+                             authentication-failure-url="/loginPage?error=error"    //4
+                            always-use-default-target="true"/>                      //5
         <!-- 表示匿名用户可以访问 -->
-        <security:intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
-        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <security:intercept-url pattern="/loginPage" access="hasRole('ROLE_ANONYMOUS')"/>   //6      
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />              //7
         <!--<security:csrf disabled="true" />-->
     </security:http>
 ```
 此时登录发现，提示Could not verify the provided CSRF token because your session was not found. 
 主要原因是；spring有csrf保护，可以通过<security:csrf disabled="true" />来禁用csrf防护，但是一般情况不要这么做,因为这样的系统有风险
+上面的配置分析：
+1. login-page 配置的是url路径，登录的默认路径，如果没有登录情况，其他路径都会转到该路径下，但是，该路径要允许匿名访问，通过6来设置，
+因此1和6的配置必须是相同的，而且要给该值设置controller的返回页面
+2. login-processing-url配置的是服务端接受登录的post请求，该值和th:action='@{/login}' method='POST'> 中的login一致
+3. default-target-url 是登录成功之后转向的路径，默认为"/"，要给该路径配置mapping页面
+4. authentication-failure-url 是登录页面失败是转向的url，可以通过例子来理解该配置的功能
+url输入：localhost:9090/notexist，这个的请求失败，因为还没有登录
+Request URL: http://localhost:9090/notexist
+Request Method: GET
+Status Code: 302 Found
+
+因此会转向默认的登录页面：
+Request URL: http://localhost:9090/loginPage
+Request Method: GET
+Status Code: 200 OK
+
+然后在该登录页面输入用户名和密码，如果输入错误，第一个POST请求失败：
+
+Request URL: http://localhost:9090/login
+Request Method: POST
+Status Code: 302 Found
+
+然后会转向authentication-failure-url定义的错误路径:
+Request URL: http://localhost:9090/loginPage?error=error
+Request Method: GET
+Status Code: 200 OK
+
+5. always-use-default-target如果设置为true，登录成功就转向default-target-url的页面
+6. 该功能是把登录页面设置为允许匿名访问，否则登录页面都拦截，还登录个屁啊
+7. 让所有的页面访问都要有USER权限才能访问
+
+
 还有一种办法是把原来的<form name='f' action='login' method='POST'>改成 thymeleaf的命名空间前缀：<form name='f' th:action='@{/login}' method='POST'>，这样就可以实现登录，原因是通过增加thymeleaf前缀后，提交表单就会自动增加一个隐藏域：_csrf，查看form data是这样的：
 ```
 username:admin

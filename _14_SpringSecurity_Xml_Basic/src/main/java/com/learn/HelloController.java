@@ -18,12 +18,12 @@ public class HelloController {
         return "hello2";
     }
     
-    @RequestMapping("login")
+    @RequestMapping("loginPage")
     public String loginPage() {
         return "login";
     }
 
-    @RequestMapping("welcome")
+    @RequestMapping({"welcome", "/"})
     public String welcome(){
         return "loginSuccess";
     }
