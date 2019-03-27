@@ -169,6 +169,7 @@ submit:Login
 _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 ```
     而如果不用thymeleaf前缀，就没有_csrf域
+-   通过spring security的方式实现登录，不需要对login实现post请求的处理，spring会自动处理    
 ### Spring Security 
 -   spring security 教程： https://www.yiibai.com/spring-security,  https://www.w3cschool.cn/springsecurity/na1k1ihx.html
 -   手动设置登录页面时， 用下面的方式：
