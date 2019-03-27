@@ -138,7 +138,37 @@
 ### SpringInAction 第九章
 -   现在已经完成了通过xml配置的Spring security的基本功能，但是昨天一天都没有实现自己实现登录页面，网上很多例子都是jsp的，看来有时间还是要把jsp看下
 ，登录页面暂时先跳过有时间再弄下，接下来第九章的要完成的任务有：通过java配置的方式实现spring Security, 还有就是熟练三个configure()方法的配置
-
+-   第九章思路整理：
+spring-security.xml中通过：
+```
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+    </security:http>
+```
+通过上面配置，就可以实现登录，但是登录的页面是spring默认提供的登录页面，如果想要自己实现登录页面， 可以在spring-security.xml中配置：
+```
+    <security:http auto-config="true">
+        <security:form-login login-page="/login"
+                             login-processing-url="/login"
+                             default-target-url="/welcome"
+                             authentication-failure-url="/loginPage?error=error"
+                            always-use-default-target="true"/>
+        <!-- 表示匿名用户可以访问 -->
+        <security:intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <!--<security:csrf disabled="true" />-->
+    </security:http>
+```
+此时登录发现，提示Could not verify the provided CSRF token because your session was not found. 
+主要原因是；spring有csrf保护，可以通过<security:csrf disabled="true" />来禁用csrf防护，但是一般情况不要这么做,因为这样的系统有风险
+还有一种办法是把原来的<form name='f' action='login' method='POST'>改成 thymeleaf的命名空间前缀：<form name='f' th:action='@{/login}' method='POST'>，这样就可以实现登录，原因是通过增加thymeleaf前缀后，提交表单就会自动增加一个隐藏域：_csrf，查看form data是这样的：
+```
+username:admin
+password:admin
+submit:Login
+_csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
+```
+    而如果不用thymeleaf前缀，就没有_csrf域
 ### Spring Security 
 -   spring security 教程： https://www.yiibai.com/spring-security,  https://www.w3cschool.cn/springsecurity/na1k1ihx.html
 -   手动设置登录页面时， 用下面的方式：
