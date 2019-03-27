@@ -17,5 +17,14 @@ public class HelloController {
     public String hello2() {
         return "hello2";
     }
+    
+    @RequestMapping("login")
+    public String loginPage() {
+        return "login";
+    }
 
+    @RequestMapping("welcome")
+    public String welcome(){
+        return "loginSuccess";
+    }
 }
