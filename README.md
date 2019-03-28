@@ -32,12 +32,43 @@
 
 
 
-### Springmvc + Thymeleaf web.xml工程搭建步骤：
-- 创建工程，maven依赖spring-webmvc、javax.servlet-api(provided)、thymeleaf-spring4, tomcat插件、packaging:war
-- webapp/WEB-INF/web.xml 配置DispatcherServlet、contextConfigLocation（*-servlet.xml）
-- *-servlet.xml文件中 配置viewResolver
-- Controller
-- webapp/WEB-INF/views/ 文件夹下html文件
+### Springmvc + Thymeleaf web.xml工程搭建步骤(_11_Springmvc_Thymeleaf_Xml)：
+1. 创建工程，maven依赖spring-webmvc、javax.servlet-api(provided)、thymeleaf-spring4, tomcat插件、packaging:war
+2. webapp/WEB-INF/web.xml 配置包括：
+（1）ContextLoaderListener
+```
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+```
+（2）配置applicationContext
+```
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+```
+(3) 配置DispatcherServlet以及servlet-mapping， 如果指定servlet.xml像下面一样配置，如果不指定，默认是/WEB-INF/servlet-name-servlet.xml文件
+```
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+```
+3.  *-servlet.xml文件中 配置viewResolver
+4 配置 Controller
+5 webapp/WEB-INF/views/ 文件夹下html文件，与Controller相对应
+
+
 
 ### 技术积累
 - ContextLoaderListener 是一种引入方式，默认读取/WEB-INF/applicationContext.xml, 若是spring-web项目，DispatcherServlet 也是一种引入方式，默认读取/WEB-INF/${servlet-name}-servlet.xml
