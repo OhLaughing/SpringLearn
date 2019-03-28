@@ -31,6 +31,14 @@
 4. 配置spring-security.xml
 5. 配置Controller
 
+### 基于javaconfig 的Spring security的工程配置流程：
+1. 依赖：spirng-security-web、spirng-security-config、thymeleaf-sping4\spring-webmvc\javax.servlet-api(provided), 增加tomcat7插件，packing:war
+2. 首先完成基于javaconfig的springmvc的相关配置：继承类AbstractAnnotationConfigDispatcherServletInitializer，并实现三个方法，WebConfig\RootConig的配置
+3. 继承类：AbstractSecurityWebApplicationInitializer，只要继承即可，什么也不用实现
+4. 最重要的：继承类 WebSecurityConfigurerAdapter，并实现三个configure()方法
+5. 配置Controller
+6. 配置页面（html）
+
 
 
 ### Springmvc + Thymeleaf web.xml工程搭建步骤(_11_Springmvc_Thymeleaf_Xml)：
