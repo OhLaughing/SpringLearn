@@ -68,6 +68,13 @@
 4 配置 Controller
 5 webapp/WEB-INF/views/ 文件夹下html文件，与Controller相对应
 
+### SpringMvc Thymeleaf 的java配置步骤：（详见工程：_16_SpringMvc_JavaConfig）
+1. 继承AbstractAnnotationConfigDispatcherServletInitializer，并实现三个抽象方法
+2. 配置WebConfig，继承WebMvcConfigurerAdapter, 配置ViewResolver的bean， @Configuration、@ComponentScan、@EnableWebMvc 注解
+3. 配置RootConfig,具体分析之后再说
+4. 将WebConfig和RootConfig配置类，在第一步的类中引用
+5. 配置Controller
+6. 配置html文件，与Controller的view相对应
 
 
 ### 技术积累
