@@ -7,6 +7,13 @@
 <div id="header" th:include="page :: header"></div>
 ```
 -   _14_SpringSecurity_Xml_Basic: spring security的基本xml配置，完成基本的用户登录， 
+-   _15_SpringSecurity_JavaConfig, login登录失败，提示
+```
+type Status report
+message /login
+description The requested resource is not available.
+```
+
 ### spring security登录的步骤, 基于web.xml的配置方式， 流程如下：
 1. 创建maven工程， package：war, 增加配置spring-security-web、spring-security-config、thymeleaf-spring4、spring-webmvc
 2. webapp/WEB-INF/web.xml中配置filter
