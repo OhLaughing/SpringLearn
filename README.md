@@ -290,11 +290,11 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 - https://moon-walker.iteye.com/blog/2395270
 - https://www.cnblogs.com/hongxf1990/p/6530084.html
 - https://docs.spring.io/spring-security/site/docs/5.2.0.BUILD-SNAPSHOT/reference/htmlsingle/#design-of-the-namespace
--       SpringBoot+Vue整合打包的栗子：https://segmentfault.com/a/1190000014211773
+- SpringBoot+Vue整合打包的栗子：https://segmentfault.com/a/1190000014211773
 
 ### 小目标
--       后端SpringBoot开发，前端Vue开发，不用前后端分离的方式，把前端Vue工程npm run build打包，然后放到SpringBoot的resources目录下，先完成最基本的页面访问功能
+- 后端SpringBoot开发，前端Vue开发，不用前后端分离的方式，把前端Vue工程npm run build打包，然后放到SpringBoot的resources目录下，先完成最基本的页面访问功能
 
 ### SpringBoot
--       spring-boot-starter-actuator:actuator是监控系统健康情况的工具。在依赖中加上即可使用
--       SpringBoot中如果加入spring-boot-starter-jdbc依赖，就必须配置dataSource数据源，否则启动失败，如果确定不自动配置数据源，可以@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})来解决
+- spring-boot-starter-actuator:actuator是监控系统健康情况的工具。在依赖中加上即可使用
+- SpringBoot中如果加入spring-boot-starter-jdbc依赖，就必须配置dataSource数据源，否则启动失败，如果确定不自动配置数据源，可以@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})来解决
