@@ -294,3 +294,6 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 
 ### 小目标
 -       后端SpringBoot开发，前端Vue开发，不用前后端分离的方式，把前端Vue工程npm run build打包，然后放到SpringBoot的resources目录下，先完成最基本的页面访问功能
+
+### SpringBoot
+-       spring-boot-starter-actuator:actuator是监控系统健康情况的工具。在依赖中加上即可使用
