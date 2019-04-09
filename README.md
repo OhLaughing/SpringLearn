@@ -297,3 +297,4 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 
 ### SpringBoot
 -       spring-boot-starter-actuator:actuator是监控系统健康情况的工具。在依赖中加上即可使用
+-       SpringBoot中如果加入spring-boot-starter-jdbc依赖，就必须配置dataSource数据源，否则启动失败，如果确定不自动配置数据源，可以@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})来解决
