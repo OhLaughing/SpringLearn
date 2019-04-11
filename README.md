@@ -299,3 +299,18 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 - spring-boot-starter-actuator:actuator是监控系统健康情况的工具。在依赖中加上即可使用
 - SpringBoot中如果加入spring-boot-starter-jdbc依赖，就必须配置dataSource数据源，否则启动失败，如果确定不自动配置数据源，可以@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})来解决
 - springboot 启动自动加载sql，默认是spring.datasource.schema: classpath:schema.sql，不需要配置，如果sql名称不是schema.sql,要在application.properties中指定：spring.datasource.schema: classpath:schema12.sql
+- 在SpringMvc开发web应用时，要显示的创建DataSource和JdbcTemplate的bean（如下），而用SpringBoot开发时，是自动组装
+```
+  @Bean
+  public DataSource dataSource() {
+    return new EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.H2)
+            .addScript("schema.sql")
+            .build();
+  }
+  
+  @Bean
+  public JdbcOperations jdbcTemplate(DataSource dataSource) {
+    return new JdbcTemplate(dataSource);
+  }
+```  
