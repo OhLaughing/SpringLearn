@@ -295,7 +295,7 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 ### 小目标
 - 后端SpringBoot开发，前端Vue开发，不用前后端分离的方式，把前端Vue工程npm run build打包，然后放到SpringBoot的resources目录下，先完成最基本的页面访问功能
 
-### SpringBoot
+### SpringBoot 的知识点记录
 - spring-boot-starter-actuator:actuator是监控系统健康情况的工具。在依赖中加上即可使用
 - SpringBoot中如果加入spring-boot-starter-jdbc依赖，就必须配置dataSource数据源，否则启动失败，如果确定不自动配置数据源，可以@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})来解决
 - springboot 启动自动加载sql，默认是spring.datasource.schema: classpath:schema.sql，不需要配置，如果sql名称不是schema.sql,要在application.properties中指定：spring.datasource.schema: classpath:schema12.sql
@@ -315,3 +315,8 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
   }
 ```  
 -  SpringBoot弄清楚自动配置，首先研究下DataSourceAutoConfiguration，   
+
+
+### _00_SpringBootDemos的栗子
+-   _01_SpringBoot_FirstDemo: springBoot的最基本的栗子，别看基础，要把每个知识点都搞懂！
+浏览器访问：localhost:8080/demo/hello，返回_01_SpringBoot_FirstDemo
