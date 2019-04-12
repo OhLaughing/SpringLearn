@@ -314,3 +314,4 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
     return new JdbcTemplate(dataSource);
   }
 ```  
+-  SpringBoot弄清楚自动配置，首先研究下DataSourceAutoConfiguration，   
