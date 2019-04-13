@@ -324,5 +324,17 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 浏览器访问：localhost:8080/demo/hello，返回_01_SpringBoot_FirstDemo
 -   _02_PropertySource_demo: 利用@PropertySource获取properties文件信息，加载时会把propertyes文件的信息读入Spring的Environment中，
 该demo演示的基本的使用，通过Environment获取properties属性时，建议使用getRequiredProperty而不是getProperty，因为前者确保能有值，
-本demo还遗留问题：1. 通过localhost:8080/user1访问返回User对象时失败
-2. @PropertySource配合propertysourcesplaceholderconfigurer使用
+本demo还遗留问题：1. 通过localhost:8080/user1访问返回User对象时失败。2. @PropertySource配合propertysourcesplaceholderconfigurer使用
+-   _03_Import_Demo： @Import和@ImportSource的栗子，@Import是javaconfig引用其他javaconfig，@ImportSource
+是JavaConfig引用xml的配置。
+-   _04_SpringBoot_AutoConfig_Demo: 根据 https://www.jianshu.com/p/464d04c36fb1 实现的demo，把父模块的pom.xml改成<packaging>pom</packaging>
+增加Hello模块，依赖spring-context，通过HelloConfig定义一个Hello的bean,注意：HelloConfig的路径为com.example1.HelloConfig
+增加World模块，依赖Hello模块，启动Spring容器里获取Hello的bean，如果Hello模块的HelloConfig与World模块的App(配置类)的路径相同(都为com.example),
+则，Spring容器中能加载Hello的bean，如果不相同，就没有Hello的bean，启动Srping就会提示：	 No qualifying bean of type 'com.example1.Hello' available
+如果路径不相同，想要在World模块的Spring容器有能加载到Hello模块的的bean，解决该问题就是在HEllo模块的\main\resources\META-INF\spring.factories文件加入
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.example1.HelloConfig，再次运行就正常了，说明在World模块中加载了
+Hello模块的bean，在AutoConfigurationImportSelector的selectImports方法中在
+```java
+List<String> configurations = getCandidateConfigurations(annotationMetadata,attributes);
+```
+处打断点，就能看到 configurations的size = 110（不一定），里面就有com.example1.HelloConfig，因此
