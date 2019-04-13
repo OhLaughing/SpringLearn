@@ -314,9 +314,15 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
     return new JdbcTemplate(dataSource);
   }
 ```  
--  SpringBoot弄清楚自动配置，首先研究下DataSourceAutoConfiguration，   
-
+-   SpringBoot弄清楚自动配置，首先研究下DataSourceAutoConfiguration，  
+-   在Spring3.1版本之前是通过PropertyPlaceholderConfigurer实现的。 
+    而3.1之后则是通过PropertySourcesPlaceholderConfigurer 实现的。
+-   spring的官方文档要好好看：spring-framework-reference.pdf
 
 ### _00_SpringBootDemos的栗子
 -   _01_SpringBoot_FirstDemo: springBoot的最基本的栗子，别看基础，要把每个知识点都搞懂！
 浏览器访问：localhost:8080/demo/hello，返回_01_SpringBoot_FirstDemo
+-   _02_PropertySource_demo: 利用@PropertySource获取properties文件信息，加载时会把propertyes文件的信息读入Spring的Environment中，
+该demo演示的基本的使用，通过Environment获取properties属性时，建议使用getRequiredProperty而不是getProperty，因为前者确保能有值，
+本demo还遗留问题：1. 通过localhost:8080/user1访问返回User对象时失败
+2. @PropertySource配合propertysourcesplaceholderconfigurer使用
