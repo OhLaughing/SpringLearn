@@ -344,9 +344,11 @@ List<String> configurations = getCandidateConfigurations(annotationMetadata,attr
 ```
 [INFO] \- org.springframework:spring-context:jar:4.3.13.RELEASE:compile
 [INFO]    +- org.springframework:spring-aop:jar:4.3.13.RELEASE:compile
-[INFO]    +- org.springframework:spring-beans:jar:4.3.13.RELEASE:compile
-[INFO]    +- org.springframework:spring-core:jar:4.3.13.RELEASE:compile
-[INFO]    |  \- commons-logging:commons-logging:jar:1.2:compile
-[INFO]    \- org.springframework:spring-expression:jar:4.3.13.RELEASE:compile
-
-```
+    [INFO]    +- org.springframework:spring-beans:jar:4.3.13.RELEASE:compile
+    [INFO]    +- org.springframework:spring-core:jar:4.3.13.RELEASE:compile
+    [INFO]    |  \- commons-logging:commons-logging:jar:1.2:compile
+    [INFO]    \- org.springframework:spring-expression:jar:4.3.13.RELEASE:compile
+    
+    ```
+    -   _02_Spring_Aop： Spring aop的栗子，有时间熟悉下
+    -   
