@@ -338,3 +338,15 @@ Hello模块的bean，在AutoConfigurationImportSelector的selectImports方法中
 List<String> configurations = getCandidateConfigurations(annotationMetadata,attributes);
 ```
 处打断点，就能看到 configurations的size = 110（不一定），里面就有com.example1.HelloConfig，因此
+
+### _00_Spring的栗子
+-   _01_ApplicationContext_Demo:一个简单的Spring栗子，只依赖了spring-context，通过mvn dependency:tree,可以发现spring-context依赖了
+```
+[INFO] \- org.springframework:spring-context:jar:4.3.13.RELEASE:compile
+[INFO]    +- org.springframework:spring-aop:jar:4.3.13.RELEASE:compile
+[INFO]    +- org.springframework:spring-beans:jar:4.3.13.RELEASE:compile
+[INFO]    +- org.springframework:spring-core:jar:4.3.13.RELEASE:compile
+[INFO]    |  \- commons-logging:commons-logging:jar:1.2:compile
+[INFO]    \- org.springframework:spring-expression:jar:4.3.13.RELEASE:compile
+
+```
