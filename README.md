@@ -318,6 +318,7 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 -   在Spring3.1版本之前是通过PropertyPlaceholderConfigurer实现的。 
     而3.1之后则是通过PropertySourcesPlaceholderConfigurer 实现的。
 -   spring的官方文档要好好看：spring-framework-reference.pdf
+-   @Configuration注解本身就是组合了@Component
 
 ### _00_SpringBootDemos的栗子
 -   _01_SpringBoot_FirstDemo: springBoot的最基本的栗子，别看基础，要把每个知识点都搞懂！
