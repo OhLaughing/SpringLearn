@@ -314,7 +314,20 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
     return new JdbcTemplate(dataSource);
   }
 ```  
--   SpringBoot弄清楚自动配置，首先研究下DataSourceAutoConfiguration，  
+-   SpringBoot弄清楚自动配置，首先研究下DataSourceAutoConfiguration，  我们知道EnableAutoConfiguration注解最重要的的一个地方是：
+```
+@Import(EnableAutoConfigurationImportSelector.class)
+```
+EnableAutoConfigurationImportSelector类的selectImports方法里是加载自动配置类的信息，该方法里的主要几行代码是：
+```
+        List<String> configurations = getCandidateConfigurations(metadata,
+                        attributes);
+        configurations = removeDuplicates(configurations);
+        Set<String> exclusions = getExclusions(metadata, attributes);
+        configurations.removeAll(exclusions);
+```                        
+exclusions就是@SpringBootApplication的excludes的属性，如果@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+那么exclusions的list里就有一个元素：DataSourceAutoConfiguration
 -   在Spring3.1版本之前是通过PropertyPlaceholderConfigurer实现的。 
     而3.1之后则是通过PropertySourcesPlaceholderConfigurer 实现的。
 -   spring的官方文档要好好看：spring-framework-reference.pdf
