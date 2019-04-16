@@ -332,6 +332,7 @@ exclusions就是@SpringBootApplication的excludes的属性，如果@SpringBootAp
     而3.1之后则是通过PropertySourcesPlaceholderConfigurer 实现的。
 -   spring的官方文档要好好看：spring-framework-reference.pdf
 -   @Configuration注解本身就是组合了@Component
+-   application.propertie文件中增加debug=true,会打印详细日志，方便开发定位
 
 ### _00_SpringBootDemos的栗子
 -   _01_SpringBoot_FirstDemo: springBoot的最基本的栗子，别看基础，要把每个知识点都搞懂！
