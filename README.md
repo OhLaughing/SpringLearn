@@ -1,4 +1,45 @@
 # SpringLearn
+
+### SpringBoot 的知识点记录
+- spring-boot-starter-actuator:actuator是监控系统健康情况的工具。在依赖中加上即可使用
+- SpringBoot中如果加入spring-boot-starter-jdbc依赖，就必须配置dataSource数据源，否则启动失败，如果确定不自动配置数据源，可以@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})来解决
+- springboot 启动自动加载sql，默认是spring.datasource.schema: classpath:schema.sql，不需要配置，如果sql名称不是schema.sql,要在application.properties中指定：spring.datasource.schema: classpath:schema12.sql
+- 在SpringMvc开发web应用时，要显示的创建DataSource和JdbcTemplate的bean（如下），而用SpringBoot开发时，是自动组装
+```
+  @Bean
+  public DataSource dataSource() {
+    return new EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.H2)
+            .addScript("schema.sql")
+            .build();
+  }
+  
+  @Bean
+  public JdbcOperations jdbcTemplate(DataSource dataSource) {
+    return new JdbcTemplate(dataSource);
+  }
+```  
+-   SpringBoot弄清楚自动配置，首先研究下DataSourceAutoConfiguration，  我们知道EnableAutoConfiguration注解最重要的的一个地方是：
+```
+@Import(EnableAutoConfigurationImportSelector.class)
+```
+EnableAutoConfigurationImportSelector类的selectImports方法里是加载自动配置类的信息，该方法里的主要几行代码是：
+```
+        List<String> configurations = getCandidateConfigurations(metadata,
+                        attributes);
+        configurations = removeDuplicates(configurations);
+        Set<String> exclusions = getExclusions(metadata, attributes);
+        configurations.removeAll(exclusions);
+```                        
+exclusions就是@SpringBootApplication的excludes的属性，如果@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+那么exclusions的list里就有一个元素：DataSourceAutoConfiguration
+-   在Spring3.1版本之前是通过PropertyPlaceholderConfigurer实现的。 
+    而3.1之后则是通过PropertySourcesPlaceholderConfigurer 实现的。
+-   spring的官方文档要好好看：spring-framework-reference.pdf
+-   @Configuration注解本身就是组合了@Component
+-   application.propertie文件中增加debug=true,会打印详细日志，方便开发定位
+
+
 ##   spring in action的学习代码, maven工程
 -   昨天弄个简单的springmvc程序（_07_SpringInAction_Chapter5_SpringWeb）失败了，提示信息有：Failed to start component [StandardEngine[Tomcat]， 上网找可能是servlet-api版本问题导致，把依赖中的servlet-api删除就可以了， 发现个问题，springmvc的依赖中并没有依赖servlet-api(包含HttpServlet)，而我们自己实现简单的servlet程序时，要有HttpServlet的，这是为什么？, 今天又发现即使该工程可以生成war包在tomcat下执行，但是工程不能编译通过，提示找不到ServletException，很奇怪。找到原因了，该工程要引入servlet-api的包，但是如果加<scope>provided</scope> 就既能编译通过，也能在tomcat下执行，如果不加scope，tomcat就不能执行
 -   _12_SpringInAction_Chapter7: springMvc的JavaConfig基础配置
@@ -295,44 +336,7 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 ### 小目标
 - 后端SpringBoot开发，前端Vue开发，不用前后端分离的方式，把前端Vue工程npm run build打包，然后放到SpringBoot的resources目录下，先完成最基本的页面访问功能
 
-### SpringBoot 的知识点记录
-- spring-boot-starter-actuator:actuator是监控系统健康情况的工具。在依赖中加上即可使用
-- SpringBoot中如果加入spring-boot-starter-jdbc依赖，就必须配置dataSource数据源，否则启动失败，如果确定不自动配置数据源，可以@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})来解决
-- springboot 启动自动加载sql，默认是spring.datasource.schema: classpath:schema.sql，不需要配置，如果sql名称不是schema.sql,要在application.properties中指定：spring.datasource.schema: classpath:schema12.sql
-- 在SpringMvc开发web应用时，要显示的创建DataSource和JdbcTemplate的bean（如下），而用SpringBoot开发时，是自动组装
-```
-  @Bean
-  public DataSource dataSource() {
-    return new EmbeddedDatabaseBuilder()
-            .setType(EmbeddedDatabaseType.H2)
-            .addScript("schema.sql")
-            .build();
-  }
-  
-  @Bean
-  public JdbcOperations jdbcTemplate(DataSource dataSource) {
-    return new JdbcTemplate(dataSource);
-  }
-```  
--   SpringBoot弄清楚自动配置，首先研究下DataSourceAutoConfiguration，  我们知道EnableAutoConfiguration注解最重要的的一个地方是：
-```
-@Import(EnableAutoConfigurationImportSelector.class)
-```
-EnableAutoConfigurationImportSelector类的selectImports方法里是加载自动配置类的信息，该方法里的主要几行代码是：
-```
-        List<String> configurations = getCandidateConfigurations(metadata,
-                        attributes);
-        configurations = removeDuplicates(configurations);
-        Set<String> exclusions = getExclusions(metadata, attributes);
-        configurations.removeAll(exclusions);
-```                        
-exclusions就是@SpringBootApplication的excludes的属性，如果@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-那么exclusions的list里就有一个元素：DataSourceAutoConfiguration
--   在Spring3.1版本之前是通过PropertyPlaceholderConfigurer实现的。 
-    而3.1之后则是通过PropertySourcesPlaceholderConfigurer 实现的。
--   spring的官方文档要好好看：spring-framework-reference.pdf
--   @Configuration注解本身就是组合了@Component
--   application.propertie文件中增加debug=true,会打印详细日志，方便开发定位
+
 
 ### _00_SpringBootDemos的栗子
 -   _01_SpringBoot_FirstDemo: springBoot的最基本的栗子，别看基础，要把每个知识点都搞懂！
@@ -364,6 +368,6 @@ List<String> configurations = getCandidateConfigurations(annotationMetadata,attr
     [INFO]    |  \- commons-logging:commons-logging:jar:1.2:compile
     [INFO]    \- org.springframework:spring-expression:jar:4.3.13.RELEASE:compile
     
-    ```
-    -   _02_Spring_Aop： Spring aop的栗子，有时间熟悉下
-    -   
+```
+-   _02_Spring_Aop： Spring aop的栗子，有时间熟悉下
+   
