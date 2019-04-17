@@ -30,7 +30,9 @@ EnableAutoConfigurationImportSelector类的selectImports方法里是加载自动
         configurations = removeDuplicates(configurations);
         Set<String> exclusions = getExclusions(metadata, attributes);
         configurations.removeAll(exclusions);
-```                        
+```
+getCandidateConfigurations方法里主要是SpringFactoriesLoader.loadFactoryNames（Class<?> factoryClass, ClassLoader classLoader）方法，此方法的功能是从所有依赖的jar包中查找"META-INF/spring.factories"文件，并找出key值为factoryClass的所有value值，例如传入方法的factoryClass为EnableAutoConfiguration.class，因此会找key值为EnableAutoConfiguration的value值，spring-boot-autoconfigure.jar中的spring.factories文件中就有key值为org.springframework.boot.autoconfigure.EnableAutoConfiguration的信息，
+-   关于Springboot自动配置的文章：https://www.cnblogs.com/xinzhao/p/5551828.html
 exclusions就是@SpringBootApplication的excludes的属性，如果@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 那么exclusions的list里就有一个元素：DataSourceAutoConfiguration
 -   在Spring3.1版本之前是通过PropertyPlaceholderConfigurer实现的。 
