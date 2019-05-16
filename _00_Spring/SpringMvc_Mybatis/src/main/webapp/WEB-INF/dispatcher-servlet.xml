@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:comtext="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="com.demo"/>
+    <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver"
+          p:templateEngine-ref="templateEngine"/>
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring4.SpringTemplateEngine"
+          p:templateResolver-ref="templateResolver"/>
+    <bean id="templateResolver"
+          class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver"
+          p:prefix="/WEB-INF/views/"
+          p:suffix=".html"
+          p:templateMode="HTML5">
+    </bean>
+</beans>
