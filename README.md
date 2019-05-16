@@ -127,8 +127,9 @@ description The requested resource is not available.
     </servlet-mapping>
 ```
 3.  *-servlet.xml文件中 配置viewResolver
-4 配置 Controller
-5 webapp/WEB-INF/views/ 文件夹下html文件，与Controller相对应
+4.  配置 Controller
+5.  webapp/WEB-INF/views/ 文件夹下html文件，与Controller相对应
+6. 关于applicationContext.xml和dispatcher-servlet.xml的区别： https://www.cnblogs.com/parryyang/p/5783399.html
 
 ### SpringMvc Thymeleaf 的java配置步骤：（详见工程：_16_SpringMvc_JavaConfig）
 1. 继承AbstractAnnotationConfigDispatcherServletInitializer，并实现三个抽象方法
