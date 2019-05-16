@@ -381,3 +381,4 @@ List<String> configurations = getCandidateConfigurations(annotationMetadata,attr
 
 ### SpringMvc + MyBatis 工程
 - 花些时间把这方面搞懂，之后你就可以那啥了
+- 栗子：https://blog.csdn.net/qq_15009805/article/details/81872327
