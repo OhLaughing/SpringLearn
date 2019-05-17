@@ -342,7 +342,8 @@ _csrf:875b17e4-b3cc-4b04-84ac-6a664d6d09e0
 ### 小目标
 - 后端SpringBoot开发，前端Vue开发，不用前后端分离的方式，把前端Vue工程npm run build打包，然后放到SpringBoot的resources目录下，先完成最基本的页面访问功能
 
-
+### 杂技术
+- Controller的方法通过httpservletresponse返回数据，理解原因，及写出栗子
 
 ### _00_SpringBootDemos的栗子
 -   _01_SpringBoot_FirstDemo: springBoot的最基本的栗子，别看基础，要把每个知识点都搞懂！
