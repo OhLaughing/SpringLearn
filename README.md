@@ -142,6 +142,7 @@ description The requested resource is not available.
 
 ### 技术积累
 - ContextLoaderListener 是一种引入方式，默认读取/WEB-INF/applicationContext.xml, 若是spring-web项目，DispatcherServlet 也是一种引入方式，默认读取/WEB-INF/${servlet-name}-servlet.xml
+- springmvc  void的方法必须加@ResponseBody ，否则出现找不到URL异常
 
 ### 第七章学习计划
 1. springmvc + Thymeleaf 通过java配置的方式基本的功能

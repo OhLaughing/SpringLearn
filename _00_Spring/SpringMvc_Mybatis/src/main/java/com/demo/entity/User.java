@@ -3,7 +3,7 @@ package com.demo.entity;
 public class User {
     private Integer id;
 
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -17,12 +17,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -39,5 +39,15 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

@@ -3,7 +3,27 @@
 <mapper namespace="com.demo.dao.UserDao">
     <!--resultType注意这个返回类型，resultMap返回类型写法不一样，可以参考别的教程-->
     <select id="getUser" resultType="com.demo.entity.User" parameterType="java.lang.Integer">
-        SELECT * FROM usertest where id =#{id}
+        SELECT * FROM user where id =#{id}
     </select>
+    <insert id="addUser" >
+        insert into USER(userName, passWord, age) VALUES (#{username}, #{password}, #{age})
+    </insert>
+    <insert id="updateUser">
+        UPDATE USER SET
+        <trim prefix="" suffix="where id = #{id}" suffixOverrides=",">
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="age != null">
+                age = #{age}
+            </if>
+        </trim>
+    </insert>
+    <delete id="delete">
+        delete from USER where id = #{id}
+    </delete>
 
 </mapper>
