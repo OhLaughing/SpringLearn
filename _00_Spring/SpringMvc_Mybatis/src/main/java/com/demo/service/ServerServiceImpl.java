@@ -20,7 +20,10 @@ public class ServerServiceImpl implements ServerService {
 
     @Override
     public Server delete(int id) {
-        return serverDao.delete(id);
+        Server s = serverDao.find(id);
+        int i = serverDao.delete(id);
+        return i > 0 ? s : null;
+
     }
 
     @Override
