@@ -5,7 +5,10 @@
     <select id="getUser" resultType="com.demo.entity.User" parameterType="java.lang.Integer">
         SELECT * FROM user where id =#{id}
     </select>
-    <insert id="addUser" >
+    <insert id="addUser">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT last_insert_rowid()
+        </selectKey>
         insert into USER(userName, passWord, age) VALUES (#{username}, #{password}, #{age})
     </insert>
     <insert id="updateUser">
