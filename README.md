@@ -170,7 +170,8 @@ description The requested resource is not available.
 http-bio-9090-exec-1  1558598016636
 {1=false} time:  1558598016660
 http-bio-9090-exec-2  1558598021660
-``
+```
+经测试发现，在同一个浏览器访问时不会出现线程安全问题的，因为一个浏览器发送的请求会串行执行，而多个浏览器访问才会并行执行
 
 ### 第七章学习计划
 1. springmvc + Thymeleaf 通过java配置的方式基本的功能
