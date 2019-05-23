@@ -143,6 +143,34 @@ description The requested resource is not available.
 ### 技术积累
 - ContextLoaderListener 是一种引入方式，默认读取/WEB-INF/applicationContext.xml, 若是spring-web项目，DispatcherServlet 也是一种引入方式，默认读取/WEB-INF/${servlet-name}-servlet.xml
 - springmvc  void的方法必须加@ResponseBody ，否则出现找不到URL异常
+- 遇到个疑问：如下
+```
+ @RequestMapping("update")
+    @ResponseBody
+    public String udpate() {
+        System.out.println(Constains.map + " time:  " + System.currentTimeMillis());
+        if (!Constains.map.get(1)) {
+            Constains.map.put(1, true);
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Constains.map.put(1, false);
+            System.out.println(Thread.currentThread().getName() + "  " + System.currentTimeMillis());
+            return "success" + System.currentTimeMillis();
+        } else {
+            return "failure";
+        }
+    }
+```
+其中map是 static Map<Integer, Boolean> map = new ConcurrentHashMap<>();由于我在方法里sleep5秒，在客户端分别执行两次请求，两次请求的间隔小于5秒，但是得到的结果如下：
+```
+{1=false} time:  1558598011635
+http-bio-9090-exec-1  1558598016636
+{1=false} time:  1558598016660
+http-bio-9090-exec-2  1558598021660
+``
 
 ### 第七章学习计划
 1. springmvc + Thymeleaf 通过java配置的方式基本的功能
