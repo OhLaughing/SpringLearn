@@ -30,6 +30,11 @@ public class HelloController {
     public void testDownload(HttpServletResponse res) {
         List<Student> list = new ArrayList<>();
         list.add(new Student(1, "james", "M", 23));
+        list.add(new Student(2, "你好", "F", 22));
+        list.add(new Student(2, "rose", "F", 22));
+        list.add(new Student(2, "rose", "F", 22));
+        list.add(new Student(2, "rose", "F", 22));
+        list.add(new Student(2, "rose", "F", 22));
         list.add(new Student(2, "rose", "F", 22));
         res.setHeader("content-type", "application/json");
         res.setContentType("application/x-download");
