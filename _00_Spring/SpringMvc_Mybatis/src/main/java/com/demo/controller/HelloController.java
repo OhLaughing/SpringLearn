@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelloController {
     @RequestMapping("/hello")
     public String hello() {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        System.out.println(loader);
+        System.out.println(loader.getParent());
+        System.out.println(loader.getParent().getParent());
         return "hello";
     }
 
