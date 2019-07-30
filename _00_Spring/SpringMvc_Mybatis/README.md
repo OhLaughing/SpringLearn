@@ -1,4 +1,4 @@
-## 本日记用于记录所有springmvc的知识点（4.3.9版本）
+## 本日记用于记录所有springmvc的知识点（4.3.9版本）(offlinecheck)
 ### Spring mvc 学习记录
 -   如果想要显示logger.debug的信息，可以通过log4j的配置log4j.rootLogger = debug
 -   学习SpringMvc主要是弄清楚DispatcherServlet，要学习DispatcherServlet，就从initStrategies(ApplicationContext context) 开始
@@ -10,3 +10,5 @@
 -   HandlerMapping和HandlerExecutionChain是什么关系,以及与HandlerAdapter什么关系
 ### 好文章
 - [debug方式深入springMVC源码的实现](https://www.jianshu.com/p/fd19e464697d)
+
+

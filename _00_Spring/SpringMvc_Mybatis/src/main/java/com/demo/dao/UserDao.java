@@ -2,8 +2,6 @@ package com.demo.dao;
 
 import com.demo.entity.User;
 
-import java.util.List;
-
 public interface UserDao {
     User getUser(Integer id);
     User addUser(User user);
