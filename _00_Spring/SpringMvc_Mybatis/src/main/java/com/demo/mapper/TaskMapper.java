@@ -1,13 +1,13 @@
-package com.demo.service;
+package com.demo.mapper;
 
 import com.demo.entity.Task;
 
 /**
  * Created by gustaov on 2019/7/30.
  */
-public interface TaskService {
+public interface TaskMapper {
     Task add(Task task);
-    Task delete(int id);
+    int delete(int id);
     int update(Task task);
     Task find(int id);
 }

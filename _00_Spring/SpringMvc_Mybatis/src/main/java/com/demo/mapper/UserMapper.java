@@ -1,10 +1,8 @@
-package com.demo.service;
+package com.demo.mapper;
 
 import com.demo.entity.User;
 
-import java.util.List;
-
-public interface UserService {
+public interface UserMapper {
     User find(int id);
     User add(User user);
     int update(User user);

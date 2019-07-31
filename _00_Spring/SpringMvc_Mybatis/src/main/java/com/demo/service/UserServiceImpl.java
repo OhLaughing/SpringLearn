@@ -1,6 +1,6 @@
 package com.demo.service;
 
-import com.demo.dao.UserDao;
+import com.demo.mapper.UserMapper;
 import com.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,26 +9,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDao userdao;
+    private UserMapper userMapper;
 
     @Override
-    public User getUser(int id) {
-        User username = userdao.getUser(id);
+    public User find(int id) {
+        User username = userMapper.find(id);
         return username;
     }
 
     @Override
-    public User addUser(User user) {
-        return userdao.addUser(user);
+    public User add(User user) {
+        return userMapper.add(user);
     }
 
     @Override
-    public boolean updateUser(User user) {
-        return userdao.updateUser(user);
+    public int update(User user) {
+        return userMapper.update(user);
     }
 
     @Override
-    public boolean delete(int id) {
-        return userdao.delete(id);
+    public int delete(int id) {
+        return userMapper.delete(id);
     }
 }

@@ -17,7 +17,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     public User queryUser(int id) {
-        User username = userService.getUser(id);
+        User username = userService.find(id);
         System.out.println(username);
         return username;
     }
@@ -26,21 +26,21 @@ public class UserController {
     @ResponseBody
     public User addUser(@RequestBody User user) {
         System.out.println(user);
-        return userService.addUser(user);
+        return userService.add(user);
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
     public void update(@RequestBody User user){
         System.out.println(user);
-        System.out.println(userService.updateUser(user));
+        System.out.println(userService.update(user));
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
     public void delete(int id){
         System.out.println("in delete");
-        boolean i = userService.delete(id);
+        int i = userService.delete(id);
         System.out.println(i);
     }
 }

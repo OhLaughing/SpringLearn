@@ -10,6 +10,6 @@
 
     <!-- mapper已经在spring-mybatis.xml中的sqlSessionFactory配置，这里不再需要配置 -->
     <!--     <mappers> -->
-    <!--         <mapper resource="com/a/b/c/dao/BusinessInfoDaoMapper.xml" /> -->
+    <!--         <mapper resource="com/a/mapper/dao/BusinessInfoDaoMapper.xml" /> -->
     <!--     </mappers> -->
 </configuration>
