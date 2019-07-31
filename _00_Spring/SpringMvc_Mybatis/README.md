@@ -11,4 +11,5 @@
 ### 好文章
 - [debug方式深入springMVC源码的实现](https://www.jianshu.com/p/fd19e464697d)
 
-
+### 杂技术
+- postman工具的form-data和raw什么区别？
