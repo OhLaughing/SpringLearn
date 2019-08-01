@@ -2,6 +2,7 @@ package com.demo.telnet;
 
 import com.demo.CheckException;
 import com.demo.MmlException;
+import com.demo.entity.Server;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.net.telnet.TelnetClient;
 
@@ -22,15 +23,18 @@ public class Telnet {
         try {
             client.connect(ip, port);
         } catch (IOException e) {
-            throw new CheckException("connect failure");
+            throw new CheckException(1, "connect failure");
         }
         in = client.getInputStream();
         out = client.getOutputStream();
         login(username, password);
     }
 
+    public Telnet(Server server) throws CheckException {
+        this(server.getIp(), Integer.valueOf(server.getPort()), server.getUsername(), server.getPassword());
+    }
+
     private void login(String username, String password) {
-        // read()Until("login:");
         readUntil("username:");
         write(username);
         readUntil("password:");
@@ -39,19 +43,12 @@ public class Telnet {
 
         String result = sendCommand("set:format=ndfmml");
         log.info("result: " + result);
-//		readUntil("$>");
-//		write(" set:format=ndfmml");
-//		readUntil("set:format=ndfmml");
-//		readUntil("$>");
         log.info("------------------------");
-//		write(""+"\r\n");
-//		readUntil("$>");
     }
 
     private String sendCommand(String command) {
         try {
             write(" " + command);
-//			String a =readUntil(command);
             return readUntil("$>");
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,13 +85,13 @@ public class Telnet {
         try {
             out.write((value + "\r\n").getBytes());
             out.flush();
-//			System.out.println("write "+value +" end ");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public Map<String, Object> sendCmd(MmlExecutor mmls) throws MmlException {
-        return mmls.excuteResult("");
+        String result = sendCommand(mmls.getMml());
+        return mmls.parseResult(result);
     }
 }

@@ -16,7 +16,7 @@ public class ShowDataVersionMml implements MmlExecutor {
     }
 
     @Override
-    public Map<String, Object> excuteResult(String result) throws MmlException {
+    public Map<String, Object> parseResult(String result) throws MmlException {
         return null;
     }
 }

@@ -9,4 +9,7 @@ public class Server {
     private String ip;
     private String port;
     private String version;
+    private String dataVersion;
+    private String username;
+    private String password;
 }
