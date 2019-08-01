@@ -45,16 +45,22 @@ public class ServerServiceImpl implements ServerService {
 
     //TODO delete 是否要返回原数据
     @Override
-    public Server delete(int id) {
-        Server s = serverMapper.find(id);
-        int i = serverMapper.delete(id);
-        return i > 0 ? s : null;
+    public int delete(int id) {
+        return serverMapper.delete(id);
 
     }
 
     @Override
     public int update(Server server) {
-        return serverMapper.update(server);
+        try {
+            connectServer(server);
+            return serverMapper.update(server);
+        } catch (CheckException e) {
+            e.printStackTrace();
+        } catch (MmlException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
