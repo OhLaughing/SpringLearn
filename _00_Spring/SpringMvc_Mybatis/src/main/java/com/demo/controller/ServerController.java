@@ -1,5 +1,8 @@
 package com.demo.controller;
 
+import com.demo.CheckException;
+import com.demo.MmlException;
+import com.demo.ReturnMsg;
 import com.demo.entity.Result;
 import com.demo.entity.Server;
 import com.demo.service.ServerService;
@@ -21,11 +24,33 @@ public class ServerController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public Server add(@RequestBody Server server) {
+    public ReturnMsg add(@RequestBody Server server) {
         System.out.println(server);
-        Server s = serverService.add(server);
-        System.out.println(s);
-        return s;
+        try {
+            int i = serverService.add(server);
+            if (i > 0) {
+                return new ReturnMsg(true, "add server success", server);
+            } else {
+                return new ReturnMsg(false, "add server failure");
+            }
+        } catch (MmlException e) {
+            e.printStackTrace();
+        } catch (CheckException e) {
+            e.printStackTrace();
+        }
+
+        return new ReturnMsg(false, "add server failure");
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Result delete(int id) {
+        Server server = serverService.delete(id);
+        if (server != null) {
+            return new Result(true, "delete server success");
+        } else {
+            return new Result(false, "delete server failure");
+        }
     }
 
     /**
@@ -39,16 +64,5 @@ public class ServerController {
     public Server update(Server server) {
         Server s = serverService.find(server.getId());
         return s;
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    @ResponseBody
-    public Result delete(int id) {
-        Server server = serverService.delete(id);
-        if (server != null) {
-            return new Result(true, "delete server success");
-        } else {
-            return new Result(false, "delete server failure");
-        }
     }
 }
