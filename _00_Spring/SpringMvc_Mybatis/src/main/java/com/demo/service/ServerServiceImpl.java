@@ -1,9 +1,16 @@
 package com.demo.service;
 
-import com.demo.mapper.ServerMapper;
+import com.demo.CheckException;
+import com.demo.MmlException;
 import com.demo.entity.Server;
+import com.demo.mapper.ServerMapper;
+import com.demo.telnet.ShowDataVersionMml;
+import com.demo.telnet.ShowServerVersionMml;
+import com.demo.telnet.Telnet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class ServerServiceImpl implements ServerService {
@@ -11,11 +18,29 @@ public class ServerServiceImpl implements ServerService {
     private ServerMapper serverMapper;
 
     @Override
-    public Server add(Server server) {
-        int i = serverMapper.add(server);
-        if (i > 0)
-            return server;
-        else return null;
+    public int add(Server server) throws MmlException, CheckException {
+        connectServer(server);
+        return serverMapper.add(server);
+    }
+
+    private void connectServer(Server server) throws CheckException, MmlException {
+        Telnet telnet = new Telnet(server);
+        Map<String, Object> result = telnet.sendCmd(new ShowDataVersionMml());
+        String code = result.get("code").toString();
+
+        if (Integer.valueOf(code) == 0) {
+            server.setDataVersion(result.get("dataversion").toString());
+        } else {
+            throw new CheckException(1, "connect serverFailure");
+        }
+        result = telnet.sendCmd(new ShowServerVersionMml());
+        code = result.get("code").toString();
+
+        if (Integer.valueOf(code) == 0) {
+            server.setVersion(result.get("serverVersion").toString());
+        } else {
+            throw new CheckException(1, "connect serverFailure");
+        }
     }
 
     //TODO delete 是否要返回原数据
