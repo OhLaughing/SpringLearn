@@ -45,8 +45,8 @@ public class ServerController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Result delete(int id) {
-        Server server = serverService.delete(id);
-        if (server != null) {
+        int result = serverService.delete(id);
+        if (result > 0) {
             return new Result(true, "delete server success");
         } else {
             return new Result(false, "delete server failure");
