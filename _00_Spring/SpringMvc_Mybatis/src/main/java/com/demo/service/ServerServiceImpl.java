@@ -25,7 +25,7 @@ public class ServerServiceImpl implements ServerService {
 
     private void connectServer(Server server) throws CheckException, MmlException {
         Telnet telnet = new Telnet(server);
-        Map<String, Object> result = telnet.sendCmd(new ShowDataVersionMml());
+        Map<String, String> result = telnet.sendCmd(new ShowDataVersionMml());
         String code = result.get("code").toString();
 
         if (Integer.valueOf(code) == 0) {
