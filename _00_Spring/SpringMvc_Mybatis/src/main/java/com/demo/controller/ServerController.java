@@ -29,6 +29,7 @@ public class ServerController {
         try {
             int i = serverService.add(server);
             if (i > 0) {
+                server.setActive(true);
                 return new ReturnMsg(true, "add server success", server);
             } else {
                 return new ReturnMsg(false, "add server failure");
@@ -62,6 +63,7 @@ public class ServerController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public Server update(Server server) {
+        serverService.update(server);
         Server s = serverService.find(server.getId());
         return s;
     }
