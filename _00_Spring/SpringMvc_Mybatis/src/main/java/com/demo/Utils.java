@@ -2,14 +2,15 @@ package com.demo;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
-
     public static final Pattern ERRORCODE_PATTERN = Pattern.compile("ERRCODE=(\\d+)");
+    public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 检查telnet是否返回一个正确的结果
