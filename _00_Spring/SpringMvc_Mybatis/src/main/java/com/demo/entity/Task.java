@@ -4,14 +4,16 @@ import lombok.Data;
 
 @Data
 public class Task {
-    private int taskNo;
-    private String taskName;
-    private int status;
     private String createTime;
-    private String startTime;
     private String endTime;
-    private int serverId;
-
+    private String filePath;
     private Server server;
+    private int serverId;
+    private String sourceVersion;
+    private String startTime;
+    private int status;
+    private String targetVersion;
+    private String taskName;
+    private int taskNo;
 
 }
