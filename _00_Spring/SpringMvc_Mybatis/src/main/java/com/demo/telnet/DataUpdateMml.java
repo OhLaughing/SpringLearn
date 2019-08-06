@@ -1,13 +1,10 @@
 package com.demo.telnet;
 
-import com.demo.MmlException;
 import com.demo.Utils;
 import com.demo.entity.Task;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 
 import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,14 +29,6 @@ public class DataUpdateMml implements MmlExecutor {
 
     @Override
     public Map<String, String> parseResult(String result) {
-        Map<String, String> map = new HashMap<>();
-        if (!Utils.checkErrorCode(result)) {
-            return map;
-        }
-        result = StringUtils.substringAfter(result, ":");
-        if(result.endsWith(";")){
-            result = StringUtils.substringBefore(result, ";");
-        }
         return Utils.getMapInfo(result);
     }
 }

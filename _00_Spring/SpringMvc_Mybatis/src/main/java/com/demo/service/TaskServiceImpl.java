@@ -14,15 +14,13 @@ public class TaskServiceImpl implements TaskService {
     private TaskMapper taskMapper;
 
     @Override
-    public Task add(Task task) {
+    public int add(Task task) {
         return taskMapper.add(task);
     }
 
     @Override
-    public Task delete(int id) {
-        Task t = taskMapper.find(id);
-        int r = taskMapper.delete(id);
-        return r > 0 ? t : null;
+    public int delete(int id) {
+        return taskMapper.delete(id);
     }
 
     @Override

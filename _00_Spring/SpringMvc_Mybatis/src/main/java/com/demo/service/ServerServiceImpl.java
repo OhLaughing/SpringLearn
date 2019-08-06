@@ -40,7 +40,7 @@ public class ServerServiceImpl implements ServerService {
         code = result.get("ERRCODE");
 
         if (Integer.valueOf(code) == 0) {
-            server.setVersion(result.get("VERSION"));
+            server.setServerVersion(result.get("VERSION"));
         } else {
             throw new CheckException(1, "connect serverFailure");
         }
@@ -57,6 +57,7 @@ public class ServerServiceImpl implements ServerService {
     public int update(Server server) {
         try {
             connectServer(server);
+            server.setUpdateTime(Utils.sdf.format(new Date()));
             return serverMapper.update(server);
         } catch (CheckException e) {
             e.printStackTrace();

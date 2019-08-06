@@ -18,12 +18,12 @@ public class TaskController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void add(Task task) {
-        Task t = taskService.add(task);
+        int t = taskService.add(task);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(int id) {
-        Task t = taskService.delete(id);
+        int t = taskService.delete(id);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

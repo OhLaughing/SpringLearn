@@ -6,34 +6,31 @@
     <insert id="add" parameterType="com.demo.entity.Server" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO SERVER
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            IP, PORT, SERVER_VERSION, DATA_VERSION, CONNECT_STATUS, UPDATE_TIME,
             <if test="desc != null">
                 DESCIPTION,
-            </if>
-            <if test="ip != null">
-                IP,
-            </if>
-            <if test="port != null">
-                PORT,
-            </if>
-            <if test="version != null">
-                VERSION,
             </if>
         </trim>
         VALUES
         <trim prefix="(" suffix=");" suffixOverrides=",">
+            #{ip}, #{port}, #{serverVersion},#{dataVersion}, 1, #{updateTime},
             <if test="desc != null">
                 #{desc},
-            </if>
-            <if test="ip != null">
-                #{ip},
-            </if>
-            <if test="port != null">
-                #{port},
-            </if>
-            <if test="version != null">
-                #{version},
             </if>
         </trim>
     </insert>
 
+    <delete id="delete" parameterType="int">
+        DELETE FROM SERVER
+        WHERE ID = #{id};
+    </delete>
+    <update id="update" parameterType="com.demo.entity.Server">
+        UPDATE SERVER
+        SET
+            SERVER_VERSION = #{serverVersion},
+            DATA_VERSION   = #{dataVersion},
+            CONNECT_STATUS = #{isActive},
+            UPDATE_TIME    = #{updateTime}
+        WHERE ID = #{id}
+    </update>
 </mapper>

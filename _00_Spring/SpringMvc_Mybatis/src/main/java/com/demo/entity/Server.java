@@ -8,8 +8,10 @@ public class Server {
     private String desc;
     private String ip;
     private String port;
-    private String version;
+    private String serverVersion;
     private String dataVersion;
     private String username;
     private String password;
+    private String updateTime;
+    private boolean isActive;
 }

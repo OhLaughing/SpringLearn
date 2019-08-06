@@ -1,5 +1,7 @@
 package com.demo.telnet;
 
+import com.demo.Utils;
+
 import java.text.MessageFormat;
 import java.util.Map;
 
@@ -24,6 +26,6 @@ public class CheckUpdateResultMml implements MmlExecutor {
 
     @Override
     public Map<String, String> parseResult(String result){
-        return null;
+        return Utils.getMapInfo(result);
     }
 }

@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *
  */
 @Controller
-@RequestMapping("server")
+@RequestMapping("/server")
 public class ServerController {
     @Autowired
     private ServerService serverService;
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ReturnMsg add(@RequestBody Server server) {
         System.out.println(server);
@@ -43,7 +43,7 @@ public class ServerController {
         return new ReturnMsg(false, "add server failure");
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     @ResponseBody
     public Result delete(int id) {
         int result = serverService.delete(id);
@@ -62,7 +62,7 @@ public class ServerController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public ReturnMsg update(Server server) {
+    public ReturnMsg update(@RequestBody Server server) {
         int i = serverService.update(server);
         if (i > 0) {
             server.setActive(true);

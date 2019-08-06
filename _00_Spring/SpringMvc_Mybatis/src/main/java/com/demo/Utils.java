@@ -42,6 +42,13 @@ public class Utils {
 
     public static Map<String, String> getMapInfo(String result) {
         Map<String, String> mapInfo = new HashMap<>();
+        if (!Utils.checkErrorCode(result)) {
+            return mapInfo;
+        }
+        result = StringUtils.substringAfter(result, ":");
+        if(result.endsWith(";")){
+            result = StringUtils.substringBefore(result, ";");
+        }
         String[] infos = StringUtils.split(result, ",");
         for (String info : infos) {
             if (!info.contains("=")) {

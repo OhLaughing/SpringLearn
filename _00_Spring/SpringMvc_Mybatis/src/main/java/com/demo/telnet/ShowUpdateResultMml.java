@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by gustaov on 2019/7/31.
  */
 public class ShowUpdateResultMml implements MmlExecutor {
-    private static String SHOW_UPDATE_RESULT_MML = "";
+    private static String SHOW_UPDATE_RESULT_MML = "CHECK UPDATE RESULT";
 
     @Override
     public String getMml() {
@@ -17,7 +17,7 @@ public class ShowUpdateResultMml implements MmlExecutor {
     }
 
     @Override
-    public Map<String, Object> parseResult(String result) throws MmlException {
+    public Map<String, String> parseResult(String result) throws MmlException {
         return null;
     }
 }
