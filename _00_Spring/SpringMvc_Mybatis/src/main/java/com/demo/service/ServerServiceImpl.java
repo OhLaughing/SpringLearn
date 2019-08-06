@@ -2,6 +2,7 @@ package com.demo.service;
 
 import com.demo.CheckException;
 import com.demo.MmlException;
+import com.demo.Utils;
 import com.demo.entity.Server;
 import com.demo.mapper.ServerMapper;
 import com.demo.telnet.ShowDataVersionMml;
@@ -10,6 +11,7 @@ import com.demo.telnet.Telnet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -20,6 +22,7 @@ public class ServerServiceImpl implements ServerService {
     @Override
     public int add(Server server) throws MmlException, CheckException {
         connectServer(server);
+        server.setUpdateTime(Utils.sdf.format(new Date()));
         return serverMapper.add(server);
     }
 
