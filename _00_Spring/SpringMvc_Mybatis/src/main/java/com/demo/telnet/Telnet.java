@@ -3,7 +3,7 @@ package com.demo.telnet;
 import com.demo.CheckException;
 import com.demo.MmlException;
 import com.demo.entity.Server;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.telnet.TelnetClient;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.io.OutputStream;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@Log4j
+@Slf4j
 public class Telnet {
     private TelnetClient client;
     private InputStream in;
@@ -90,8 +90,9 @@ public class Telnet {
         }
     }
 
-    public Map<String, Object> sendCmd(MmlExecutor mmls) throws MmlException {
+    public Map<String, String> sendCmd(MmlExecutor mmls) throws MmlException {
         String result = sendCommand(mmls.getMml());
+        log.info("mml result: " + result);
         return mmls.parseResult(result);
     }
 }
