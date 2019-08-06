@@ -62,9 +62,13 @@ public class ServerController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public Server update(Server server) {
-        serverService.update(server);
-        Server s = serverService.find(server.getId());
-        return s;
+    public ReturnMsg update(Server server) {
+        int i = serverService.update(server);
+        if (i > 0) {
+            server.setActive(true);
+            return new ReturnMsg(true, "update server success", server);
+        } else {
+            return new ReturnMsg(false, "udpate server failure");
+        }
     }
 }
