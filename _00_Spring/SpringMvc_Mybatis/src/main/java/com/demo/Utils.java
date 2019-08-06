@@ -1,5 +1,9 @@
 package com.demo;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,6 +13,7 @@ public class Utils {
 
     /**
      * 检查telnet是否返回一个正确的结果
+     * 正确的结果返回true，错误的结果，返回false
      *
      * @param result
      * @return
@@ -21,7 +26,7 @@ public class Utils {
             r = false;
         } else {
             String errorCode = getErrorCode(result);
-            r=  errorCode != null && "0".equals(errorCode);
+            r = "0".equals(errorCode);
         }
         return r;
     }
@@ -33,4 +38,25 @@ public class Utils {
         }
         return null;
     }
+
+    public static Map<String, String> getMapInfo(String result) {
+        Map<String, String> mapInfo = new HashMap<>();
+        String[] infos = StringUtils.split(result, ",");
+        for (String info : infos) {
+            if (!info.contains("=")) {
+                continue;
+            }
+            String key = StringUtils.substringBefore(info, "=");
+            String value = StringUtils.substringAfter(info, "=");
+            if (value.startsWith("\"")) {
+                value = StringUtils.substringAfter(value, "\"");
+            }
+            if (value.endsWith("\"")) {
+                value = StringUtils.substringBefore(value, "\"");
+            }
+            mapInfo.put(key, value);
+        }
+        return mapInfo;
+    }
+
 }
