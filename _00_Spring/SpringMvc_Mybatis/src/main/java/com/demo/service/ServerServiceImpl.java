@@ -26,18 +26,18 @@ public class ServerServiceImpl implements ServerService {
     private void connectServer(Server server) throws CheckException, MmlException {
         Telnet telnet = new Telnet(server);
         Map<String, String> result = telnet.sendCmd(new ShowDataVersionMml());
-        String code = result.get("code").toString();
+        String code = result.get("ERRCODE");
 
         if (Integer.valueOf(code) == 0) {
-            server.setDataVersion(result.get("dataversion").toString());
+            server.setDataVersion(result.get("VERSION"));
         } else {
             throw new CheckException(1, "connect serverFailure");
         }
         result = telnet.sendCmd(new ShowServerVersionMml());
-        code = result.get("code").toString();
+        code = result.get("ERRCODE");
 
         if (Integer.valueOf(code) == 0) {
-            server.setVersion(result.get("serverVersion").toString());
+            server.setVersion(result.get("VERSION"));
         } else {
             throw new CheckException(1, "connect serverFailure");
         }
