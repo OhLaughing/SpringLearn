@@ -3,8 +3,6 @@ package com.demo;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class UtilsTest {
 
     @Test
@@ -17,6 +15,14 @@ public class UtilsTest {
         Assert.assertFalse(Utils.checkErrorCode("HelloidERRCODE=01Helloid"));
         Assert.assertTrue(Utils.checkErrorCode("HelloidERRCODE=0Helloid"));
 
+    }
+
+    @Test
+    public void testGetIntValue() {
+        Assert.assertEquals(Utils.getPercent("0%"), 0);
+        Assert.assertEquals(Utils.getPercent("0a%"), 0);
+        Assert.assertEquals(Utils.getPercent("0"), 0);
+        Assert.assertEquals(Utils.getPercent("01%"), 1);
     }
 
 }

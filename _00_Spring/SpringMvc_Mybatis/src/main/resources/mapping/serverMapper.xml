@@ -2,18 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.demo.mapper.ServerMapper">
     <!--resultType注意这个返回类型，resultMap返回类型写法不一样，可以参考别的教程-->
-
+    <resultMap id="serverMap" type="com.demo.entity.Server">
+        <id property="id" column="id"/>
+        <result property="ip" column="ip"/>
+        <result property="port" column="port"/>
+        <result property="serverVersion" column="SERVER_VERSION"/>
+        <result property="dataVersion" column="DATA_VERSION"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="isActive" column="IS_ACTIVE"/>
+    </resultMap>
     <insert id="add" parameterType="com.demo.entity.Server" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO SERVER
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            IP, PORT, SERVER_VERSION, DATA_VERSION, IS_ACTIVE, UPDATE_TIME,
+            IP, PORT, SERVER_VERSION, DATA_VERSION, IS_ACTIVE, UPDATE_TIME,USERNAME, PASSWORD,
             <if test="desc != null">
                 DESCIPTION,
             </if>
         </trim>
         VALUES
         <trim prefix="(" suffix=");" suffixOverrides=",">
-            #{ip}, #{port}, #{serverVersion},#{dataVersion}, #{isActive}, #{updateTime},
+            #{ip}, #{port}, #{serverVersion},#{dataVersion}, #{isActive}, #{updateTime},#{username}, #{password},
             <if test="desc != null">
                 #{desc},
             </if>
@@ -29,11 +39,12 @@
         SET
             SERVER_VERSION = #{serverVersion},
             DATA_VERSION   = #{dataVersion},
-            IS_ACTIVE = #{isActive},
+            IS_ACTIVE      = #{isActive},
             UPDATE_TIME    = #{updateTime}
         WHERE ID = #{id}
     </update>
-    <select id="find" parameterType="int" resultType="com.demo.entity.Server">
-        SELECT
+    <select id="find" parameterType="int" resultMap="serverMap">
+        SELECT id, ip, port, SERVER_VERSION, DATA_VERSION, username, password, UPDATE_TIME, IS_ACTIVE
+        from SERVER WHERE id = #{id}
     </select>
 </mapper>

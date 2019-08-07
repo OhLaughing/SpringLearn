@@ -46,7 +46,7 @@ public class Utils {
             return mapInfo;
         }
         result = StringUtils.substringAfter(result, ":");
-        if(result.endsWith(";")){
+        if (result.contains(";")) {
             result = StringUtils.substringBefore(result, ";");
         }
         String[] infos = StringUtils.split(result, ",");
@@ -67,4 +67,16 @@ public class Utils {
         return mapInfo;
     }
 
+    public static int getPercent(String progress) {
+        if (progress.endsWith("%")) {
+            progress = StringUtils.substringBefore(progress, "%");
+        }
+        int i = 0;
+        try {
+            i = Integer.valueOf(progress);
+        } catch (Exception e) {
+
+        }
+        return i;
+    }
 }

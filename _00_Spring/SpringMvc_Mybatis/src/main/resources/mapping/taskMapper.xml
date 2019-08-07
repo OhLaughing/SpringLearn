@@ -5,7 +5,73 @@
 
     <insert id="add" parameterType="com.demo.entity.Task" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO TASK
-
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskName != null">
+                TASK_NAME,
+            </if>
+            <if test="startTime != null">
+                START_TIME,
+            </if>
+            <if test="serverId != null">
+                SERVERID,
+            </if>
+            <if test="filePath != null">
+                FILE_PATH,
+            </if>
+            <if test="sourceVersion != null">
+                SOURCE_VERSION,
+            </if>
+            <if test="targetVersion != null">
+                TARGET_VERSION,
+            </if>
+            PROGESS
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskName != null">
+                #{taskName},
+            </if>
+            <if test="startTime != null">
+                #{startTime},
+            </if>
+            <if test="serverId != null">
+                #{serverId},
+            </if>
+            <if test="filePath != null">
+                #{filePath},
+            </if>
+            <if test="sourceVersion != null">
+                #{sourceVersion},
+            </if>
+            <if test="targetVersion != null">
+                #{targetVersion},
+            </if>
+            0
+        </trim>
     </insert>
 
+    <update id="update" parameterType="com.demo.entity.Task">
+        UPDATE TASK
+        SET
+            PROGESS = #{progess}
+        WHERE TASKNO = #{taskNo}
+
+    </update>
+
+    <select id="find" resultType="com.demo.entity.Task">
+        SELECT
+            TASKNO,
+            TASK_NAME as taskName,
+            STATUS,
+            PROGESS,
+            CREATE_TIME as createTime,
+            START_TIME as startTime,
+            END_TIME as endTime,
+            SERVERID,
+            FILE_PATH as filePath,
+            SOURCE_VERSION as sourceVersion,
+            TARGET_VERSION as targetVersion
+        FROM TASK
+        WHERE TASKNO = #{taskNo}
+    </select>
 </mapper>

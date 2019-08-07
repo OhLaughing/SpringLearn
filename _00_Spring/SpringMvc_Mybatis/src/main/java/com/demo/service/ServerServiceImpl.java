@@ -22,6 +22,7 @@ public class ServerServiceImpl implements ServerService {
     @Override
     public int add(Server server) throws MmlException, CheckException {
         connectServer(server);
+        server.setActive(true);
         server.setUpdateTime(Utils.sdf.format(new Date()));
         return serverMapper.add(server);
     }
@@ -57,6 +58,7 @@ public class ServerServiceImpl implements ServerService {
     public int update(Server server) {
         try {
             connectServer(server);
+            server.setActive(true);
             server.setUpdateTime(Utils.sdf.format(new Date()));
             return serverMapper.update(server);
         } catch (CheckException e) {

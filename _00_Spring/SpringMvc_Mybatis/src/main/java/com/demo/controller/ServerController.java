@@ -8,10 +8,7 @@ import com.demo.entity.Server;
 import com.demo.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -29,7 +26,6 @@ public class ServerController {
         try {
             int i = serverService.add(server);
             if (i > 0) {
-                server.setActive(true);
                 return new ReturnMsg(true, "add server success", server);
             } else {
                 return new ReturnMsg(false, "add server failure");
@@ -43,9 +39,9 @@ public class ServerController {
         return new ReturnMsg(false, "add server failure");
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Result delete(int id) {
+    public Result delete(@PathVariable("id") int id) {
         int result = serverService.delete(id);
         if (result > 0) {
             return new Result(true, "delete server success");
@@ -65,10 +61,15 @@ public class ServerController {
     public ReturnMsg update(@RequestBody Server server) {
         int i = serverService.update(server);
         if (i > 0) {
-            server.setActive(true);
             return new ReturnMsg(true, "update server success", server);
         } else {
             return new ReturnMsg(false, "udpate server failure");
         }
+    }
+
+    @RequestMapping(value = "/find/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Server findServer(@PathVariable("id") int id) {
+        return serverService.find(id);
     }
 }
