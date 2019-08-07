@@ -34,6 +34,7 @@ public class TaskServiceImpl implements TaskService {
             Map<String, String> resultInfo = telnet.sendCmd(new DataUpdateMml(task));
             if (resultInfo.containsKey("TASKNO")) {
                 task.setCreateTime(Utils.sdf.format(new Date()));
+                task.setStatus(0);
                 task.setTaskNo(Integer.valueOf(resultInfo.get("TASKNO")));
                 return taskMapper.add(task);
             } else {

@@ -14,5 +14,6 @@ public class Task {
     private String filePath;
     private int progress;
     private int serverId;
+    //0 -created 1- executing 2- finished
     private int status;
 }
