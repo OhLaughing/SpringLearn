@@ -6,6 +6,9 @@
     <insert id="add" parameterType="com.demo.entity.Task" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO TASK
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskNo != null">
+                TASKNO,
+            </if>
             <if test="taskName != null">
                 TASK_NAME,
             </if>
@@ -24,10 +27,16 @@
             <if test="targetVersion != null">
                 TARGET_VERSION,
             </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
             PROGESS
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskNo != null">
+                #{taskNo},
+            </if>
             <if test="taskName != null">
                 #{taskName},
             </if>
@@ -45,6 +54,9 @@
             </if>
             <if test="targetVersion != null">
                 #{targetVersion},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
             </if>
             0
         </trim>
