@@ -21,7 +21,7 @@ public class CheckUpdateResultMml implements MmlExecutor {
 
     @Override
     public String getMml() {
-        return SHOW_UPDATE_RESULT_MML;
+        return telnetCommand;
     }
 
     @Override
