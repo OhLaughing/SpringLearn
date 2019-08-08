@@ -84,6 +84,6 @@
             SOURCE_VERSION as sourceVersion,
             TARGET_VERSION as targetVersion
         FROM TASK
-        WHERE TASKNO = #{taskNo}
+        WHERE id = #{id}
     </select>
 </mapper>

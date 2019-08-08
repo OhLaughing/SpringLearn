@@ -44,7 +44,7 @@
         WHERE ID = #{id}
     </update>
     <select id="find" parameterType="int" resultMap="serverMap">
-        SELECT id, ip, port, SERVER_VERSION, DATA_VERSION, username, password, UPDATE_TIME, IS_ACTIVE
+        SELECT id, ip, port, SERVER_VERSION as serverVersion, DATA_VERSION as dataVersion, username, password, UPDATE_TIME, IS_ACTIVE
         from SERVER WHERE id = #{id}
     </select>
 

@@ -37,6 +37,7 @@ public class TaskController {
 
     @RequestMapping(value = "/find/{id}", method = RequestMethod.GET)
     public Task find(@PathVariable("id") int id) {
+        System.out.println(id);
         return taskService.find(id);
     }
 
