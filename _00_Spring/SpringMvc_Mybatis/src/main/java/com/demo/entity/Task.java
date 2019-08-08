@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class Task {
-    private int taskNo;
+    private int id;
+    private String taskNo;
     private String taskName;
     private String createTime;
     private String startTime;
@@ -12,7 +13,7 @@ public class Task {
     private String sourceVersion;
     private String targetVersion;
     private String filePath;
-    private int progress;
+    private int progess;
     private int serverId;
     //0 -created 1- executing 2- finished
     private int status;
