@@ -1,8 +1,6 @@
 package com.demo.service;
 
-import com.demo.CheckException;
-import com.demo.MmlException;
-import com.demo.Utils;
+import com.demo.*;
 import com.demo.entity.Server;
 import com.demo.entity.Task;
 import com.demo.mapper.ServerMapper;
@@ -35,7 +33,9 @@ public class TaskServiceImpl implements TaskService {
             if (resultInfo.containsKey("TASKNO")) {
                 task.setCreateTime(Utils.sdf.format(new Date()));
                 task.setStatus(0);
-                task.setTaskNo(Integer.valueOf(resultInfo.get("TASKNO")));
+                task.setTaskNo(resultInfo.get("TASKNO"));
+                ServerInitListener.getThreadPoolExecutor(task.getServerId()).execute(
+                        new CheckResultRunnable(task, taskMapper, telnet));
                 return taskMapper.add(task);
             } else {
                 return 0;
@@ -59,7 +59,7 @@ public class TaskServiceImpl implements TaskService {
         try {
             Telnet telnet = new Telnet(server);
             Map<String, String> resultInfo = telnet.sendCmd(new CheckUpdateResultMml(String.valueOf(task.getTaskNo())));
-            task.setProgress(Utils.getPercent(resultInfo.get("PROGRESS")));
+            task.setProgess(Utils.getPercent(resultInfo.get("PROGESS")));
             return taskMapper.update(task);
         } catch (CheckException e) {
             e.printStackTrace();
