@@ -30,14 +30,20 @@ public class TaskServiceImpl implements TaskService {
         try {
             Telnet telnet = new Telnet(server);
             Map<String, String> resultInfo = telnet.sendCmd(new DataUpdateMml(task));
+
             if (resultInfo.containsKey("TASKNO")) {
                 task.setCreateTime(Utils.sdf.format(new Date()));
                 task.setStatus(0);
                 task.setTaskNo(resultInfo.get("TASKNO"));
-                ServerInitListener.getThreadPoolExecutor(task.getServerId()).execute(
-                        new CheckResultRunnable(task, taskMapper, telnet));
-                return taskMapper.add(task);
+                int result = taskMapper.add(task);
+                if (result > 0) {
+                    ServerInitListener.getThreadPoolExecutor(task.getServerId()).execute(
+                            new CheckResultRunnable(task, taskMapper, server));
+                }
+                telnet.disconnect();
+                return result;
             } else {
+                telnet.disconnect();
                 return 0;
             }
         } catch (CheckException e) {
@@ -59,6 +65,7 @@ public class TaskServiceImpl implements TaskService {
         try {
             Telnet telnet = new Telnet(server);
             Map<String, String> resultInfo = telnet.sendCmd(new CheckUpdateResultMml(String.valueOf(task.getTaskNo())));
+            telnet.disconnect();
             task.setProgess(Utils.getPercent(resultInfo.get("PROGESS")));
             return taskMapper.update(task);
         } catch (CheckException e) {

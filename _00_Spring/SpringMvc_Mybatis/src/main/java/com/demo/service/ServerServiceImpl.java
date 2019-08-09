@@ -38,6 +38,7 @@ public class ServerServiceImpl implements ServerService {
             throw new CheckException(1, "connect serverFailure");
         }
         result = telnet.sendCmd(new ShowServerVersionMml());
+        telnet.disconnect();
         code = result.get("ERRCODE");
 
         if (Integer.valueOf(code) == 0) {

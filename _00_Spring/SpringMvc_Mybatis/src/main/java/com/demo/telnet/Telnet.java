@@ -18,7 +18,7 @@ public class Telnet {
     private InputStream in;
     private OutputStream out;
 
-    public Telnet(String ip, int port, String username, String password) throws CheckException {
+    public Telnet(String ip, int port, String username, String password) throws CheckException, MmlException {
         client = new TelnetClient();
         try {
             client.connect(ip, port);
@@ -30,11 +30,11 @@ public class Telnet {
         login(username, password);
     }
 
-    public Telnet(Server server) throws CheckException {
+    public Telnet(Server server) throws CheckException, MmlException {
         this(server.getIp(), Integer.valueOf(server.getPort()), server.getUsername(), server.getPassword());
     }
 
-    private void login(String username, String password) {
+    private void login(String username, String password) throws MmlException {
         readUntil("username:");
         write(username);
         readUntil("password:");
@@ -81,12 +81,12 @@ public class Telnet {
         return sb.toString();
     }
 
-    public void write(String value) {
+    public void write(String value) throws MmlException {
         try {
             out.write((value + "\r\n").getBytes());
             out.flush();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new MmlException();
         }
     }
 
@@ -94,5 +94,15 @@ public class Telnet {
         String result = sendCommand(mmls.getMml());
         log.info("mml result: " + result);
         return mmls.parseResult(result);
+    }
+
+    public void disconnect() {
+        try {
+            if (client != null)
+                client.disconnect();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

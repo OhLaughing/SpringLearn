@@ -1,7 +1,9 @@
 package com.demo.controller;
 
 import com.demo.ReturnMsg;
+import com.demo.entity.Server;
 import com.demo.entity.Task;
+import com.demo.service.ServerService;
 import com.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +19,14 @@ import java.text.MessageFormat;
 public class TaskController {
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private ServerService serverService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ReturnMsg add(@RequestBody Task task) {
         int t = taskService.add(task);
         if (t > 0) {
-
             return new ReturnMsg(true, "add task successful, taskNo:" + task.getTaskNo(), task);
         } else {
             return new ReturnMsg(false, "add task failure");
@@ -31,14 +34,23 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(int id) {
+    @ResponseBody
+    public ReturnMsg delete(int id) {
         int t = taskService.delete(id);
+        if (t > 0) {
+            return new ReturnMsg(true, "delete task successful");
+        } else {
+            return new ReturnMsg(false, "delete task failure");
+        }
     }
 
     @RequestMapping(value = "/find/{id}", method = RequestMethod.GET)
+    @ResponseBody
     public Task find(@PathVariable("id") int id) {
         System.out.println(id);
-        return taskService.find(id);
+        Task task = taskService.find(id);
+        System.out.println(task);
+        return task;
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
