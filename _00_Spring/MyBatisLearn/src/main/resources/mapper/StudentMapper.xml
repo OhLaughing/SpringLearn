@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.StudentMapper">
+    <insert id="add" parameterType="com.demo.pojo.Student" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            name,
+            <if test="major != null">
+                MAJOR,
+            </if>
+            <if test="address != null">
+                ADDRES,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{name},
+            <if test="major != null">
+                #{major},
+            </if>
+            <if test="address != null">
+                #{address},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findByAddressAndMajor" resultType="com.demo.pojo.Student">
+        SELECT *
+        FROM STUDENT
+        WHERE address = #{address_1}
+              AND major = #{major}
+    </select>
+
+    <select id="findByAddressAndMajor1" resultType="com.demo.pojo.Student">
+        SELECT *
+        FROM STUDENT
+        WHERE address = #{arg0}
+              AND major = #{arg1}
+    </select>
+
+    <select id="findByMap" parameterType="map" resultType="student">
+        SELECT *
+        FROM STUDENT
+        WHERE address = #{address_1}
+              AND major = #{major}
+    </select>
+
+</mapper>
